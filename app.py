@@ -6,29 +6,20 @@ from config import Config
 from routes.main import main_bp
 from routes.analyze import analyze_bp
 
+# Create Flask app directly (no create_app function)
+app = Flask(
+    __name__,
+    template_folder="templates",
+    static_folder="static",
+)
 
-def create_app():
-    app = Flask(
-        __name__,
-        template_folder="templates",
-        static_folder="static",
-    )
+CORS(app)
 
-    # Configure Flask
-    CORS(app)
-
-    # Register application routes
-    app.register_blueprint(main_bp)
-    app.register_blueprint(analyze_bp)
-
-    return app
+# Register routes
+app.register_blueprint(main_bp)
+app.register_blueprint(analyze_bp)
 
 
-# Vercel requires a top-level Flask application instance.
-app = create_app()
-
-
-# Local development only
 if __name__ == "__main__":
     print("-" * 58)
     print("  DeepFakeShield AI Server")
