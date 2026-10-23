@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+api.txt
+node_modules/
+__pycache__/
+.venv/
+venv/

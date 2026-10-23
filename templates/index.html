@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LenSight AI — Media Forensics</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='logo.png') }}">
+</head>
+<body>
+  <div class="app">
+
+    <!-- ============================= TOP BAR ============================= -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brandmark">
+          <img src="{{ url_for('static', filename='logo.png') }}" alt="Lensight AI Logo">
+        </div>
+        <div>LenSight AI<small>MEDIA FORENSICS</small></div>
+      </div>
+      <div class="topright">
+        <span class="time" id="clock">LOCAL SESSION</span>
+        <span class="online"><i class="dot"></i> READY</span>
+      </div>
+    </header>
+
+    <div class="layout">
+
+      <!-- ============================= SIDEBAR ============================= -->
+      <aside class="sidebar">
+        <div class="navlabel">WORKSPACE</div>
+        <button class="nav active" data-view="analysis"><span class="navicon">◈</span> Media analysis</button>
+        <button class="nav" data-view="report"><span class="navicon">▤</span> Forensic reports</button>
+        <button class="nav" data-view="guide"><span class="navicon">ⓘ</span> How it works</button>
+        <button class="nav" data-view="cybercrime"><span class="navicon">⚠</span> Report Cybercrime</button>
+        <div class="side-note">
+          <strong>Prototype environment</strong>
+          Results are evidence, not proof — review carefully.
+        </div>
+      </aside>
+
+      <!-- ============================= MAIN CONTENT ============================= -->
+      <main class="main">
+
+        <div class="pagehead">
+          <div>
+            <div class="eyebrow">Trust · Inspect · Verify</div>
+            <h1>Media authenticity analysis</h1>
+            <p>Inspect images, videos and audio recordings for potential manipulation or AI-generation indicators.</p>
+          </div>
+          <div class="caseid">CASE<b id="caseId">DFS-LOCAL-0001</b></div>
+        </div>
+
+        <!-- ============================= STATS ============================= -->
+        <div class="stats">
+          <div class="stat">
+            <div class="stathead">SUPPORTED FORMATS</div>
+            <div class="statval">Image · Video · Audio</div>
+            <div class="statfoot">JPEG, PNG, MP4, WebM, MP3, WAV</div>
+          </div>
+          <div class="stat">
+            <div class="stathead">REPORT STATUS</div>
+            <div class="statval" id="reportStat">No report</div>
+            <div class="statfoot">Generated after analysis</div>
+          </div>
+        </div>
+
+        <!-- ============================= ANALYSIS VIEW ============================= -->
+        <div class="contentgrid" id="analysisView">
+
+          <!-- ---------- MAIN COLUMN ---------- -->
+          <section class="panel">
+            <div class="panelhead">
+              <div>
+                <h2>Evidence intake</h2>
+                <p>Select a file to examine</p>
+              </div>
+              <span class="tag">STEP 01</span>
+            </div>
+            <div class="panelbody">
+
+              <!-- DROP ZONE -->
+              <div class="drop" id="dropZone">
+                <div class="uploadicon">⇧</div>
+                <h3>Drop your file here</h3>
+                <p>Images, videos, or audio recordings</p>
+                <button class="primary" id="browseBtn">Choose file</button>
+                <input id="fileInput" type="file"
+                      accept="image/*,video/mp4,video/webm,video/quicktime,audio/*"
+                      hidden>
+                <div class="hint">Files are sent only when you click Run analysis.</div>
+              </div>
+
+              <!-- FILE META -->
+              <div class="filemeta" id="fileMeta">
+                <div class="filebadge" id="fileBadge">IMG</div>
+                <div class="filedetails">
+                  <div class="filename" id="fileName"></div>
+                  <div class="filesub" id="fileSub"></div>
+                </div>
+                <button class="remove" id="removeFile" title="Remove file">×</button>
+              </div>
+
+              <!-- PREVIEWS -->
+              <img id="imagePreview" class="preview" alt="Selected image preview">
+              <video id="videoPreview" class="preview" controls></video>
+              <audio id="audioPreview" class="preview" controls></audio>
+
+              <!-- RUN ROW -->
+              <div class="runrow">
+                <div class="disclaimer">Media is sent to Gemini for forensic review. Results are evidence, not proof.</div>
+                <button class="primary" id="analyzeBtn">Run analysis →</button>
+              </div>
+
+              <!-- PROGRESS -->
+              <div class="progress-section hidden" id="progressSection">
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill" id="progressBar"></div>
+                </div>
+                <div class="progress-text" id="progressText">Preparing...</div>
+              </div>
+
+              <!-- RESULT -->
+              <div class="result" id="result">
+                <div class="panel" style="margin-top:20px">
+                  <div class="panelhead">
+                    <div>
+                      <h2>Findings</h2>
+                      <p id="resultSubtitle">Report details</p>
+                    </div>
+                    <span class="tag" id="resultTag">REPORT</span>
+                  </div>
+                  <div class="panelbody">
+
+                    <div class="resulttop">
+                      <div>
+                        <h3 id="verdictTitle">Analysis complete</h3>
+                        <p id="verdictDesc"></p>
+                      </div>
+                      <span class="verdictpill" id="verdictPill">RESULT</span>
+                    </div>
+
+                    <div class="voiceverdict hidden" id="voiceVerdict">
+                      <div class="voiceverdict-icon" id="voiceVerdictIcon">🎙</div>
+                      <div>
+                        <div class="voiceverdict-label">VOICE CLASSIFICATION</div>
+                        <div class="voiceverdict-value" id="voiceVerdictValue">—</div>
+                        <div class="voiceverdict-sub" id="voiceVerdictSub">Human vs. AI-generated speech</div>
+                      </div>
+                    </div>
+
+                    <div class="resultmetrics">
+                      <div class="metric"><span>Confidence</span><strong id="confidence">—</strong></div>
+                      <div class="metric"><span>Indicators</span><strong id="checksCount">0</strong></div>
+                      <div class="metric" id="framesMetric" style="display:none"><span>Frames</span><strong id="framesCount">0</strong></div>
+                      <div class="metric" id="durationMetric" style="display:none"><span>Duration</span><strong id="durationCount">—</strong></div>
+                      <div class="metric"><span>Media type</span><strong id="mediaTypeBadge">—</strong></div>
+                    </div>
+
+                    <div class="checks" id="checksList"></div>
+                    <div class="reportnote" id="reportNote"></div>
+
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+                      <button class="secondary" id="downloadReport">Export report</button>
+                      <button class="secondary" id="newCase">New case</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+        </div>
+
+        <!-- ============================= REPORT VIEW ============================= -->
+        <section class="panel hidden" id="reportView">
+          <div class="panelhead">
+            <div>
+              <h2>Forensic reports</h2>
+              <p>Reports generated during this session</p>
+            </div>
+            <span class="tag">CASE LOG</span>
+          </div>
+          <div class="panelbody" id="reportHistory" style="color:var(--muted)">
+            No reports yet. Run an analysis to generate a report.
+          </div>
+        </section>
+
+        <!-- ============================= GUIDE VIEW ============================= -->
+        <section class="panel hidden" id="guideView">
+          <div class="panelhead">
+            <div>
+              <h2>How it works</h2>
+              <p>Prototype behavior and responsible interpretation</p>
+            </div>
+            <span class="tag">GUIDE</span>
+          </div>
+          <div class="panelbody">
+
+            <div class="guide-section">
+              <h4>Image analysis</h4>
+              <p>The uploaded image is sent to Gemini, which inspects it for visible indicators of manipulation, synthetic generation, or deepfake characteristics such as anatomical errors, lighting inconsistencies, and GAN fingerprints.</p>
+            </div>
+
+            <div class="guide-section">
+              <h4>Video analysis</h4>
+              <p>The backend extracts 5 frames evenly spaced across the first 5 seconds. Gemini inspects them for per-frame anomalies and temporal inconsistencies between frames.</p>
+            </div>
+
+            <div class="guide-section">
+              <h4>Audio analysis</h4>
+              <p>The uploaded audio clip is sent to Gemini's multimodal audio model. Rather than converting speech to text, the model listens to the waveform and evaluates whether the voice is natural human speech or AI-generated / cloned audio.</p>
+            </div>
+
+            <div class="guide-subgrid">
+              <div class="guide-card">
+                <h4>Voice &amp; speech cues</h4>
+                <ul>
+                  <li>Unnatural prosody or monotone rhythm</li>
+                  <li>Absent or irregular breathing patterns</li>
+                  <li>No hesitations or mouth noise</li>
+                  <li>Overly perfect pronunciation</li>
+                  <li>Emotional flatness</li>
+                </ul>
+              </div>
+              <div class="guide-card">
+                <h4>Acoustic &amp; signal cues</h4>
+                <ul>
+                  <li>Neural vocoder artifacts</li>
+                  <li>Band-limited frequency range</li>
+                  <li>Metallic or buzzy timbre</li>
+                  <li>Missing room tone</li>
+                  <li>Splicing artifacts</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="guide-section">
+              <h4>Limitations</h4>
+              <p>A confidence score is not the probability that a file is genuine or fake. Modern text-to-speech and voice-cloning systems can be extremely realistic. Findings should be treated as evidence for review, not proof.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================= CYBERCRIME VIEW ============================= -->
+        <section class="panel hidden" id="cybercrimeView">
+          <div class="panelhead">
+            <div>
+              <h2>Report Cybercrime in India</h2>
+              <p>Official channels, helplines, and resources</p>
+            </div>
+            <span class="tag">HELP</span>
+          </div>
+          <div class="panelbody">
+
+            <div class="cyber-emergency">
+              <div class="cyber-emergency-icon">☎</div>
+              <div class="cyber-emergency-content">
+                <div class="cyber-emergency-label">NATIONAL HELPLINE</div>
+                <div class="cyber-emergency-number">1930</div>
+                <div class="cyber-emergency-sub">Toll-free · 24/7 · Report financial fraud within the Golden Hour</div>
+              </div>
+            </div>
+
+            <div class="cyber-section">
+              <h3 class="cyber-heading">About cybercrime</h3>
+              <p class="cyber-text">
+                Cybercrime includes online financial fraud, identity theft, phishing, ransomware, deepfake abuse, AI voice-cloning scams, cyberstalking, and social media impersonation. The <strong>Indian Cyber Crime Coordination Centre (I4C)</strong> under the Ministry of Home Affairs is the central agency addressing cybercrime.
+              </p>
+            </div>
+
+            <div class="cyber-warning">
+              <strong>AI Voice Cloning Scams:</strong> Fraudsters can clone a relative's voice from just seconds of social media audio. Always verify by calling back on a known number or asking a personal question. Report such calls to 1930.
+            </div>
+
+            <div class="cyber-grid">
+              <div class="cyber-card">
+                <h4>Financial Fraud</h4>
+                <p>Report online payment fraud, UPI scams, or banking fraud within 1 hour.</p>
+                <a class="cyber-link" href="tel:1930">Call 1930 →</a>
+              </div>
+
+              <div class="cyber-card">
+                <h4>Online Portal</h4>
+                <p>File a formal complaint through the National Cyber Crime Reporting Portal.</p>
+                <a class="cyber-link" href="https://cybercrime.gov.in" target="_blank" rel="noopener">cybercrime.gov.in →</a>
+              </div>
+
+              <div class="cyber-card">
+                <h4>Women &amp; Child Safety</h4>
+                <p>Report crimes against women and children, including deepfakes and harassment.</p>
+                <a class="cyber-link" href="https://cybercrime.gov.in/Webform/Accept.aspx" target="_blank" rel="noopener">Report now →</a>
+              </div>
+
+              <div class="cyber-card">
+                <h4>Sanchar Saathi</h4>
+                <p>Report fraud calls, block stolen phones, check mobile connections in your name.</p>
+                <a class="cyber-link" href="https://sancharsaathi.gov.in" target="_blank" rel="noopener">sancharsaathi.gov.in →</a>
+              </div>
+
+              <div class="cyber-card">
+                <h4>CERT-In</h4>
+                <p>Report security incidents, malware, and vulnerabilities.</p>
+                <a class="cyber-link" href="https://www.cert-in.org.in" target="_blank" rel="noopener">cert-in.org.in →</a>
+              </div>
+
+              <div class="cyber-card">
+                <h4>Local Police</h4>
+                <p>Visit nearest station or State Cyber Cell to file an FIR with evidence.</p>
+                <a class="cyber-link" href="tel:112">Emergency: 112</a>
+              </div>
+            </div>
+
+            <div class="cyber-section">
+              <h3 class="cyber-heading">Steps to file a complaint</h3>
+              <div class="cyber-steps">
+                <div class="cyber-step"><span class="cyber-step-num">1</span><div><b>Preserve evidence</b><p>Save screenshots, URLs, recordings, transaction IDs, and phone numbers.</p></div></div>
+                <div class="cyber-step"><span class="cyber-step-num">2</span><div><b>Call 1930</b><p>For financial fraud, report within the Golden Hour.</p></div></div>
+                <div class="cyber-step"><span class="cyber-step-num">3</span><div><b>Visit cybercrime.gov.in</b><p>Register and file a detailed complaint with evidence.</p></div></div>
+                <div class="cyber-step"><span class="cyber-step-num">4</span><div><b>Track complaint</b><p>Use the acknowledgement number to track status online.</p></div></div>
+                <div class="cyber-step"><span class="cyber-step-num">5</span><div><b>Follow up locally</b><p>Visit your local station if needed to convert to an FIR.</p></div></div>
+              </div>
+            </div>
+
+            <div class="cyber-warning">
+              <strong>Important:</strong> Never share OTPs, passwords, or banking credentials. Official agencies will never ask for such details over phone or email.
+            </div>
+
+          </div>
+        </section>
+
+        <div class="footer">
+          <span>LENSIGHT AI · PROTOTYPE</span>
+          <span>Forensic assistance, not a definitive guarantee</span>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
