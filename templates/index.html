@@ -10,49 +10,42 @@
 <body>
   <div class="app">
 
-    <!-- ============================= TOP BAR ============================= -->
     <header class="topbar">
       <div class="brand">
-        <div class="brandmark">
-          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-label="LenSight logo">
+        <div class="brandmark" role="img" aria-label="LenSight AI logo">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <linearGradient id="lensRing" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#c7d2fe"/>
-                <stop offset="50%" stop-color="#a5b4fc"/>
-                <stop offset="100%" stop-color="#818cf8"/>
+              <linearGradient id="g1" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#c7d2fe"/>
+                <stop offset=".5" stop-color="#a5b4fc"/>
+                <stop offset="1" stop-color="#818cf8"/>
               </linearGradient>
-              <radialGradient id="lensIris" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#1a1a1f"/>
-                <stop offset="70%" stop-color="#0f0f13"/>
-                <stop offset="100%" stop-color="#050507"/>
+              <radialGradient id="g2" cx="20" cy="20" r="9" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#1e1e24"/>
+                <stop offset="1" stop-color="#0a0a0d"/>
               </radialGradient>
-              <radialGradient id="lensGlow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#a5b4fc" stop-opacity="0.9"/>
-                <stop offset="100%" stop-color="#a5b4fc" stop-opacity="0"/>
+              <radialGradient id="g3" cx="20" cy="20" r="7" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#a5b4fc" stop-opacity=".85"/>
+                <stop offset="1" stop-color="#a5b4fc" stop-opacity="0"/>
               </radialGradient>
             </defs>
-            <!-- Outer lens ring -->
-            <circle cx="20" cy="20" r="15.5" fill="none" stroke="url(#lensRing)" stroke-width="1.6" opacity="0.95"/>
-            <!-- Aperture blades -->
-            <g stroke="url(#lensRing)" stroke-width="0.8" fill="none" opacity="0.5">
-              <line x1="20" y1="6" x2="20" y2="12"/>
-              <line x1="32.1" y1="13" x2="26.9" y2="16"/>
-              <line x1="32.1" y1="27" x2="26.9" y2="24"/>
-              <line x1="20" y1="34" x2="20" y2="28"/>
-              <line x1="7.9" y1="27" x2="13.1" y2="24"/>
-              <line x1="7.9" y1="13" x2="13.1" y2="16"/>
-            </g>
-            <!-- Iris -->
-            <circle cx="20" cy="20" r="9" fill="url(#lensIris)" stroke="url(#lensRing)" stroke-width="0.8"/>
-            <!-- Glow -->
-            <circle cx="20" cy="20" r="7" fill="url(#lensGlow)" opacity="0.6"/>
-            <!-- Verification checkmark -->
-            <path d="M15.5 20L18.5 23L24.5 17" fill="none" stroke="#a5b4fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <!-- Highlight reflection -->
-            <circle cx="24" cy="15" r="1.2" fill="#f5f5f7" opacity="0.85"/>
+            <circle cx="20" cy="20" r="15.5" stroke="url(#g1)" stroke-width="1.6" opacity=".92"/>
+            <line x1="20" y1="5.5" x2="20" y2="11.5" stroke="url(#g1)" stroke-width=".7" opacity=".45"/>
+            <line x1="32.6" y1="12.7" x2="27.2" y2="15.8" stroke="url(#g1)" stroke-width=".7" opacity=".45"/>
+            <line x1="32.6" y1="27.3" x2="27.2" y2="24.2" stroke="url(#g1)" stroke-width=".7" opacity=".45"/>
+            <line x1="20" y1="34.5" x2="20" y2="28.5" stroke="url(#g1)" stroke-width=".7" opacity=".45"/>
+            <line x1="7.4" y1="27.3" x2="12.8" y2="24.2" stroke="url(#g1)" stroke-width=".7" opacity=".45"/>
+            <line x1="7.4" y1="12.7" x2="12.8" y2="15.8" stroke="url(#g1)" stroke-width=".7" opacity=".45"/>
+            <circle cx="20" cy="20" r="9" fill="url(#g2)" stroke="url(#g1)" stroke-width=".75"/>
+            <circle cx="20" cy="20" r="6.5" fill="url(#g3)" opacity=".55"/>
+            <path d="M15.5 20l3 3 6-6" stroke="#a5b4fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="24.2" cy="14.8" r="1.1" fill="#f5f5f7" opacity=".8"/>
           </svg>
         </div>
-        <div>LenSight AI<small>MEDIA FORENSICS</small></div>
+        <div class="brand-text">
+          <span class="brand-name">LenSight AI</span>
+          <span class="brand-sub">MEDIA FORENSICS</span>
+        </div>
       </div>
       <div class="topright">
         <span class="time" id="clock">LOCAL SESSION</span>
@@ -62,7 +55,6 @@
 
     <div class="layout">
 
-      <!-- ============================= SIDEBAR ============================= -->
       <aside class="sidebar">
         <div class="navlabel">WORKSPACE</div>
         <button class="nav active" data-view="analysis"><span class="navicon">◈</span> Media analysis</button>
@@ -75,7 +67,6 @@
         </div>
       </aside>
 
-      <!-- ============================= MAIN CONTENT ============================= -->
       <main class="main">
 
         <div class="pagehead">
@@ -87,7 +78,6 @@
           <div class="caseid">CASE<b id="caseId">DFS-LOCAL-0001</b></div>
         </div>
 
-        <!-- ============================= STATS ============================= -->
         <div class="stats">
           <div class="stat">
             <div class="stathead">SUPPORTED FORMATS</div>
@@ -101,10 +91,7 @@
           </div>
         </div>
 
-        <!-- ============================= ANALYSIS VIEW ============================= -->
         <div class="contentgrid" id="analysisView">
-
-          <!-- ---------- MAIN COLUMN ---------- -->
           <section class="panel">
             <div class="panelhead">
               <div>
@@ -115,19 +102,15 @@
             </div>
             <div class="panelbody">
 
-              <!-- DROP ZONE -->
               <div class="drop" id="dropZone">
                 <div class="uploadicon">⇧</div>
                 <h3>Drop your file here</h3>
                 <p>Images, videos, or audio recordings</p>
                 <button class="primary" id="browseBtn">Choose file</button>
-                <input id="fileInput" type="file"
-                      accept="image/*,video/mp4,video/webm,video/quicktime,audio/*"
-                      hidden>
+                <input id="fileInput" type="file" accept="image/*,video/mp4,video/webm,video/quicktime,audio/*" hidden>
                 <div class="hint">Files are sent only when you click Run analysis.</div>
               </div>
 
-              <!-- FILE META -->
               <div class="filemeta" id="fileMeta">
                 <div class="filebadge" id="fileBadge">IMG</div>
                 <div class="filedetails">
@@ -137,18 +120,15 @@
                 <button class="remove" id="removeFile" title="Remove file">×</button>
               </div>
 
-              <!-- PREVIEWS -->
               <img id="imagePreview" class="preview" alt="Selected image preview">
               <video id="videoPreview" class="preview" controls></video>
               <audio id="audioPreview" class="preview" controls></audio>
 
-              <!-- RUN ROW -->
               <div class="runrow">
                 <div class="disclaimer">Media is sent to Gemini for forensic review. Results are evidence, not proof.</div>
                 <button class="primary" id="analyzeBtn">Run analysis →</button>
               </div>
 
-              <!-- PROGRESS -->
               <div class="progress-section hidden" id="progressSection">
                 <div class="progress-bar-bg">
                   <div class="progress-bar-fill" id="progressBar"></div>
@@ -156,7 +136,6 @@
                 <div class="progress-text" id="progressText">Preparing...</div>
               </div>
 
-              <!-- RESULT -->
               <div class="result" id="result">
                 <div class="panel" style="margin-top:20px">
                   <div class="panelhead">
@@ -196,7 +175,7 @@
                     <div class="checks" id="checksList"></div>
                     <div class="reportnote" id="reportNote"></div>
 
-                    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+                    <div class="result-actions">
                       <button class="secondary" id="downloadReport">Export report</button>
                       <button class="secondary" id="newCase">New case</button>
                     </div>
@@ -206,10 +185,8 @@
 
             </div>
           </section>
-
         </div>
 
-        <!-- ============================= REPORT VIEW ============================= -->
         <section class="panel hidden" id="reportView">
           <div class="panelhead">
             <div>
@@ -223,7 +200,6 @@
           </div>
         </section>
 
-        <!-- ============================= GUIDE VIEW ============================= -->
         <section class="panel hidden" id="guideView">
           <div class="panelhead">
             <div>
@@ -279,7 +255,6 @@
           </div>
         </section>
 
-        <!-- ============================= CYBERCRIME VIEW ============================= -->
         <section class="panel hidden" id="cybercrimeView">
           <div class="panelhead">
             <div>
@@ -301,9 +276,7 @@
 
             <div class="cyber-section">
               <h3 class="cyber-heading">About cybercrime</h3>
-              <p class="cyber-text">
-                Cybercrime includes online financial fraud, identity theft, phishing, ransomware, deepfake abuse, AI voice-cloning scams, cyberstalking, and social media impersonation. The <strong>Indian Cyber Crime Coordination Centre (I4C)</strong> under the Ministry of Home Affairs is the central agency addressing cybercrime.
-              </p>
+              <p class="cyber-text">Cybercrime includes online financial fraud, identity theft, phishing, ransomware, deepfake abuse, AI voice-cloning scams, cyberstalking, and social media impersonation. The <strong>Indian Cyber Crime Coordination Centre (I4C)</strong> under the Ministry of Home Affairs is the central agency addressing cybercrime.</p>
             </div>
 
             <div class="cyber-warning">
@@ -316,31 +289,26 @@
                 <p>Report online payment fraud, UPI scams, or banking fraud within 1 hour.</p>
                 <a class="cyber-link" href="tel:1930">Call 1930 →</a>
               </div>
-
               <div class="cyber-card">
                 <h4>Online Portal</h4>
                 <p>File a formal complaint through the National Cyber Crime Reporting Portal.</p>
                 <a class="cyber-link" href="https://cybercrime.gov.in" target="_blank" rel="noopener">cybercrime.gov.in →</a>
               </div>
-
               <div class="cyber-card">
                 <h4>Women &amp; Child Safety</h4>
                 <p>Report crimes against women and children, including deepfakes and harassment.</p>
                 <a class="cyber-link" href="https://cybercrime.gov.in/Webform/Accept.aspx" target="_blank" rel="noopener">Report now →</a>
               </div>
-
               <div class="cyber-card">
                 <h4>Sanchar Saathi</h4>
                 <p>Report fraud calls, block stolen phones, check mobile connections in your name.</p>
                 <a class="cyber-link" href="https://sancharsaathi.gov.in" target="_blank" rel="noopener">sancharsaathi.gov.in →</a>
               </div>
-
               <div class="cyber-card">
                 <h4>CERT-In</h4>
                 <p>Report security incidents, malware, and vulnerabilities.</p>
                 <a class="cyber-link" href="https://www.cert-in.org.in" target="_blank" rel="noopener">cert-in.org.in →</a>
               </div>
-
               <div class="cyber-card">
                 <h4>Local Police</h4>
                 <p>Visit nearest station or State Cyber Cell to file an FIR with evidence.</p>
