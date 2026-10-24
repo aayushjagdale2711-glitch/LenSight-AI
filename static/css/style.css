@@ -4,7 +4,6 @@
    ========================================================= */
 
 :root {
-  /* Deep base with warm undertone */
   --bg: #0a0a0c;
   --bg-elev: #0f0f12;
   --panel: #141418;
@@ -20,20 +19,17 @@
   --muted: #8e8e95;
   --muted-2: #5a5a62;
 
-  /* Refined accent — subtle blue-violet */
   --accent: #a5b4fc;
   --accent-dim: #818cf8;
   --accent-glow: rgba(165, 180, 252, 0.15);
   --accent-soft: rgba(165, 180, 252, 0.08);
 
-  /* Semantic (used sparingly) */
   --green: #86efac;
   --green-dim: #4ade80;
   --amber: #fcd34d;
   --red: #fca5a5;
   --blue: #93c5fd;
 
-  /* Gradients */
   --grad-bg:
     radial-gradient(1200px 600px at 85% -10%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
     radial-gradient(900px 500px at 15% 110%, rgba(165, 180, 252, 0.05) 0%, transparent 50%),
@@ -84,7 +80,6 @@ body {
   letter-spacing: -0.005em;
 }
 
-/* Subtle noise texture overlay */
 body::before {
   content: "";
   position: fixed;
@@ -117,7 +112,6 @@ ul li { color: var(--muted); font-size: 12.5px; padding: 3px 0; line-height: 1.6
 
 .hidden { display: none !important; }
 
-/* Scrollbars */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
@@ -163,21 +157,26 @@ ul li { color: var(--muted); font-size: 12.5px; padding: 3px 0; line-height: 1.6
   line-height: 1.2;
 }
 
+/* ====================== BRANDMARK (SVG LOGO) ====================== */
 .brandmark {
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
-  background: linear-gradient(145deg, #1a1a20, #0f0f13);
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(165, 180, 252, 0.12), transparent 60%),
+    linear-gradient(145deg, #1a1a20, #0a0a0d);
   border: 1px solid var(--line);
   display: grid;
   place-items: center;
-  overflow: hidden;
   padding: 4px;
   flex-shrink: 0;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    0 2px 8px rgba(0, 0, 0, 0.3);
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+    0 2px 10px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(165, 180, 252, 0.08);
   position: relative;
+  transition: all var(--t-med);
 }
 
 .brandmark::after {
@@ -185,16 +184,32 @@ ul li { color: var(--muted); font-size: 12.5px; padding: 3px 0; line-height: 1.6
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(135deg, var(--accent-soft), transparent 60%);
+  background:
+    linear-gradient(135deg, rgba(165, 180, 252, 0.08), transparent 50%),
+    linear-gradient(315deg, rgba(255, 255, 255, 0.03), transparent 50%);
   pointer-events: none;
 }
 
-.brandmark img {
+.brandmark:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+    0 4px 16px rgba(0, 0, 0, 0.5),
+    0 0 28px rgba(165, 180, 252, 0.18);
+  transform: translateY(-1px);
+}
+
+.brandmark svg {
   width: 100%;
   height: 100%;
-  object-fit: contain;
   position: relative;
   z-index: 1;
+  display: block;
+  transition: transform var(--t-slow);
+}
+
+.brandmark:hover svg {
+  transform: rotate(15deg);
 }
 
 .brand small {
