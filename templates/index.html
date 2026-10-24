@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>LenSight AI — Media Forensics</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-  <link rel="shortcut icon" href="static/logo.png">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='15.5' fill='none' stroke='%23a5b4fc' stroke-width='1.6'/%3E%3Ccircle cx='20' cy='20' r='9' fill='%230f0f13' stroke='%23a5b4fc' stroke-width='0.8'/%3E%3Cpath d='M15.5 20L18.5 23L24.5 17' fill='none' stroke='%23a5b4fc' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 </head>
 <body>
   <div class="app">
@@ -14,7 +14,43 @@
     <header class="topbar">
       <div class="brand">
         <div class="brandmark">
-          <img src="/static/logo.png" alt="Logo">
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-label="LenSight logo">
+            <defs>
+              <linearGradient id="lensRing" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#c7d2fe"/>
+                <stop offset="50%" stop-color="#a5b4fc"/>
+                <stop offset="100%" stop-color="#818cf8"/>
+              </linearGradient>
+              <radialGradient id="lensIris" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#1a1a1f"/>
+                <stop offset="70%" stop-color="#0f0f13"/>
+                <stop offset="100%" stop-color="#050507"/>
+              </radialGradient>
+              <radialGradient id="lensGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#a5b4fc" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#a5b4fc" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <!-- Outer lens ring -->
+            <circle cx="20" cy="20" r="15.5" fill="none" stroke="url(#lensRing)" stroke-width="1.6" opacity="0.95"/>
+            <!-- Aperture blades -->
+            <g stroke="url(#lensRing)" stroke-width="0.8" fill="none" opacity="0.5">
+              <line x1="20" y1="6" x2="20" y2="12"/>
+              <line x1="32.1" y1="13" x2="26.9" y2="16"/>
+              <line x1="32.1" y1="27" x2="26.9" y2="24"/>
+              <line x1="20" y1="34" x2="20" y2="28"/>
+              <line x1="7.9" y1="27" x2="13.1" y2="24"/>
+              <line x1="7.9" y1="13" x2="13.1" y2="16"/>
+            </g>
+            <!-- Iris -->
+            <circle cx="20" cy="20" r="9" fill="url(#lensIris)" stroke="url(#lensRing)" stroke-width="0.8"/>
+            <!-- Glow -->
+            <circle cx="20" cy="20" r="7" fill="url(#lensGlow)" opacity="0.6"/>
+            <!-- Verification checkmark -->
+            <path d="M15.5 20L18.5 23L24.5 17" fill="none" stroke="#a5b4fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Highlight reflection -->
+            <circle cx="24" cy="15" r="1.2" fill="#f5f5f7" opacity="0.85"/>
+          </svg>
         </div>
         <div>LenSight AI<small>MEDIA FORENSICS</small></div>
       </div>
